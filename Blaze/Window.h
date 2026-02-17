@@ -123,8 +123,8 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
         GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
         _T("ImGui Window Class"), NULL };
     RegisterClassEx(&wc);
-    g_hWnd = CreateWindow(wc.lpszClassName, _T("Blaze"),
-        WS_OVERLAPPEDWINDOW, 100, 100, 450, 400,
+    g_hWnd = CreateWindow(wc.lpszClassName, _T("Blaze But Cooler"),
+        WS_OVERLAPPEDWINDOW, 100, 100, 450, 450,
         NULL, NULL, wc.hInstance, NULL);
 
     // Initialize D3D
@@ -190,6 +190,104 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
         }
 
         //here!!
+
+// new shit that i can add cus im coler than RootLander
+        ImGui::Separator();
+        ImGui::Text("Game Values");
+
+        // open localhost
+        if (ImGui::Button("open localhost:5555")) {
+            wchar_t WCommandStr[256] = L"open 127.0.0.1:5555";
+            MultiByteToWideChar(CP_UTF8, 0, "", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+       
+        if (ImGui::Button("open localhost:3551")) {
+            wchar_t WCommandStr[256] = L"open 127.0.0.1:3551";
+            MultiByteToWideChar(CP_UTF8, 0, "", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        // FOV Slider with real-time preview
+        static int fovValue = 90; // Default FOV
+        ImGui::SliderInt("FOV Value", &fovValue, 70, 120);
+        ImGui::SameLine();
+        if (ImGui::Button("Apply FOV")) {
+            // Convert and execute the FOV command
+            char fovCmd[64];
+            sprintf_s(fovCmd, "fov %d", fovValue);
+
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, fovCmd, -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        // Optional: Add a second button for instant FOV (if you want both)
+        ImGui::SameLine();
+        if (ImGui::Button("Reset FOV (90)")) {
+            fovValue = 90; // Reset slider
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "fov 90", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        // /Game/Maps/PVP/PVP_Tower
+        if (ImGui::Button("Open PVP_Tower Map")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "open /Game/Maps/PVP/PVP_Tower", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        // /Game/Maps/AITestbed_2
+        if (ImGui::Button("Open AITestbed_2")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "open /Game/Maps/AITestbed_2", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        // demospeed
+        if (ImGui::Button("DemoSpeed Defualt")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "demospeed 1", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+        if (ImGui::Button("DemoSpeed 0")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "demospeed 0", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        if (ImGui::Button("DemoSpeed 100")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "demospeed 100", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+        // fly
+        if (ImGui::Button("fly")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "fly", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+        // god mode
+        // fly
+        if (ImGui::Button("god mode")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "god", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        ImGui::Separator(); // Optional separator after the new controls
 
 
 
