@@ -177,6 +177,23 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
             ImGuiWindowFlags_AlwaysAutoResize |
             ImGuiWindowFlags_NoCollapse);
 
+
+            auto idk = R"(    
+__________.____       _____  _____________________
+\______   \    |     /  _  \ \____    /\_   _____/
+ |    |  _/    |    /  /_\  \  /     /  |    __)_ 
+ |    |   \    |___/    |    \/     /_  |        \
+ |______  /_______ \____|__  /_______ \/_______  /
+        \/        \/       \/        \/        \/ 
+But Better 
+                                             )";
+            printf(idk);
+            printf(" \n");
+            printf("\nNOTE: This is in testing and is not complete as of yet\n");
+            printf("\nModded by tr1268\n");
+            printf("\nCreated by RootLander\n");
+        
+
         int roomSlot = 68;
 
         ImGui::InputText("Command To Execute", CommandBuffer, 256);
@@ -285,10 +302,34 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
             SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
         }
         // god mode
-        // fly
         if (ImGui::Button("god mode")) {
             wchar_t WCommandStr[256] = L"";
             MultiByteToWideChar(CP_UTF8, 0, "god", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        ImGui::Separator();
+        ImGui::Text("Game Controllers - unfinished");
+
+        // spawn husk
+        if (ImGui::Button("spawn husk")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "summon Huskpawn_C", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        if (ImGui::Button("inf ammo")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "ToggleInfiniteAmmo", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        if (ImGui::Button("inf Stamina")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "ToggleInfiniteStamina", -1, WCommandStr, 256);
             SDK::UWorld* World = SDK::UWorld::GetWorld();
             SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
         }
@@ -326,5 +367,7 @@ DWORD WINAPI RUNWINDOW(LPVOID Params)
 
     return 0;
 }
+
+
 
 #endif // WINDOW_H
