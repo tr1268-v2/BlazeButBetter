@@ -193,22 +193,7 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
 
 // new shit that i can add cus im coler than RootLander
         ImGui::Separator();
-        ImGui::Text("Game Values");
-
-        // open localhost
-        if (ImGui::Button("open localhost:5555")) {
-            wchar_t WCommandStr[256] = L"open 127.0.0.1:5555";
-            MultiByteToWideChar(CP_UTF8, 0, "", -1, WCommandStr, 256);
-            SDK::UWorld* World = SDK::UWorld::GetWorld();
-            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
-        }
-       
-        if (ImGui::Button("open localhost:3551")) {
-            wchar_t WCommandStr[256] = L"open 127.0.0.1:3551";
-            MultiByteToWideChar(CP_UTF8, 0, "", -1, WCommandStr, 256);
-            SDK::UWorld* World = SDK::UWorld::GetWorld();
-            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
-        }
+        ImGui::Text("Game Settings");
 
         // FOV Slider with real-time preview
         static int fovValue = 90; // Default FOV
@@ -227,16 +212,26 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
 
         // Optional: Add a second button for instant FOV (if you want both)
         ImGui::SameLine();
-        if (ImGui::Button("Reset FOV (90)")) {
+        if (ImGui::Button("Reset FOV (0)")) {
             fovValue = 90; // Reset slider
             wchar_t WCommandStr[256] = L"";
-            MultiByteToWideChar(CP_UTF8, 0, "fov 90", -1, WCommandStr, 256);
+            MultiByteToWideChar(CP_UTF8, 0, "fov 0", -1, WCommandStr, 256);
             SDK::UWorld* World = SDK::UWorld::GetWorld();
             SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
         }
 
+        ImGui::Separator();
+        ImGui::Text("GameServers");
+
+        // open localhost       
+        if (ImGui::Button("open localhost:7777")) {
+            wchar_t WCommandStr[256] = L"open 127.0.0.1:7777";
+            MultiByteToWideChar(CP_UTF8, 0, "", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
         // /Game/Maps/PVP/PVP_Tower
-        if (ImGui::Button("Open PVP_Tower Map")) {
+        if (ImGui::Button("Open PVP_Tower")) {
             wchar_t WCommandStr[256] = L"";
             MultiByteToWideChar(CP_UTF8, 0, "open /Game/Maps/PVP/PVP_Tower", -1, WCommandStr, 256);
             SDK::UWorld* World = SDK::UWorld::GetWorld();
@@ -250,6 +245,17 @@ inline int RunImGuiWindow(HINSTANCE hInstance)
             SDK::UWorld* World = SDK::UWorld::GetWorld();
             SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
         }
+
+        // opens lobby
+        if (ImGui::Button("Open Frontend")) {
+            wchar_t WCommandStr[256] = L"";
+            MultiByteToWideChar(CP_UTF8, 0, "open FortniteEntry", -1, WCommandStr, 256);
+            SDK::UWorld* World = SDK::UWorld::GetWorld();
+            SDK::UKismetSystemLibrary::ExecuteConsoleCommand(World, SDK::FString(WCommandStr), nullptr);
+        }
+
+        ImGui::Separator();
+        ImGui::Text("Game Values");
 
         // demospeed
         if (ImGui::Button("DemoSpeed Defualt")) {
@@ -320,7 +326,5 @@ DWORD WINAPI RUNWINDOW(LPVOID Params)
 
     return 0;
 }
-
-
 
 #endif // WINDOW_H
